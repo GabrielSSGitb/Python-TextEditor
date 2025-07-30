@@ -1,0 +1,75 @@
+import sys
+from tkinter import * # For Python 3.x, use 'from tkinter import *'
+
+# 1. Create the main window FIRST
+root = Tk() # Use Tk() without an argument for the main window object.
+            # The title is set separately.
+
+root.title("Python Text Editor") # Set the window title
+
+# 2. Create the Label widget
+# You define the parent (root in this case) and the text content.
+my_label = Label(root, text="Welcome to my simple Text Editor!")
+
+# 3. Place the Label widget using .grid()
+# We'll put it in row 0, column 0.
+my_label.grid(row=0, column=0, pady=5) # pady adds a little vertical sSpace
+
+# 4. Create the Text widget
+text = Text(root, wrap='word') # 'wrap=word' ensures lines break at word boundaries
+
+# 5. Place the Text widget below the label
+# We'll put it in row 1, column 0.
+text.grid(row=1, column=0, sticky="nsew", padx=5, pady=5) # sticky makes it expand
+
+# Optional: Configure row/column weights for responsiveness
+# This tells Tkinter that row 1 and column 0 should expand when the window is resized.
+root.grid_rowconfigure(1, weight=1)
+root.grid_columnconfigure(0, weight=1)
+
+# 6. Start the main event loop LAST
+root.mainloop()
+
+
+
+Explanation of Changes:
+
+import sys (Optional but good practice): I've included import sys at the top. While from tkinter import * is the standard for Python 3, if you were still handling Python 2 compatibility, you'd use the version check as discussed previously. For modern Python, just from tkinter import * is sufficient.
+
+root = Tk(): The Tk() constructor should generally be called without an argument for the main root window. The window title is set with root.title().
+
+Order of Operations: All widget creation and layout (.grid(), .pack(), .place()) must happen before root.mainloop() is called.
+
+my_label = Label(root, text="Welcome to my simple Text Editor!"):
+
+Label: This is the Tkinter widget class for displaying static text or images.
+
+(root, ...): The first argument is the parent widget, which is root (our main window). This tells Tkinter that my_label should appear inside root.
+
+text="...": This keyword argument sets the actual text that the label will display.
+
+my_label.grid(row=0, column=0, pady=5):
+
+We use the grid() layout manager.
+
+row=0, column=0: Places the label in the first row and first column of the grid.
+
+pady=5: Adds 5 pixels of vertical padding above and below the label, separating it slightly from the window's edge and other widgets.
+
+text.grid(row=1, column=0, sticky="nsew", padx=5, pady=5):
+
+The Text widget is now placed in row=1, meaning it will appear below the label.
+
+sticky="nsew": This is very important for a text editor. It tells the Text widget to "stick" to all four sides (North, South, East, West) of its grid cell. This makes the Text widget expand horizontally and vertically when the main window is resized.
+
+padx=5, pady=5: Adds a little padding around the text widget as well.
+
+root.grid_rowconfigure(1, weight=1) and root.grid_columnconfigure(0, weight=1):
+
+These lines are crucial for making your GUI responsive.
+
+grid_rowconfigure(row_index, weight=value) tells the grid that this particular row should expand proportionally when the window is resized. A weight of 1 (or any positive number) means it will take up available extra space.
+
+Similarly, grid_columnconfigure(column_index, weight=value) does the same for a column.
+
+In this setup, when you resize the window, row 1 (where the Text widget is) and column 0 (which both widgets occupy) will expand, causing the Text widget to grow.
