@@ -1,6 +1,6 @@
 import sys
 v = sys.version_info
-content = None
+print(v.minor)
 if v.major == 2:
     print("Python Version 2.x") #for Version 2 of Python
     from tkinter import *
