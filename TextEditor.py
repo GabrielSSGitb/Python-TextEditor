@@ -1,30 +1,36 @@
 import sys
-from tkinter import *
-v = sys.version_info #try to verify the py version here!!!
-import tkinter as tk
-from tkinter import filedialog
-def saveas():
-    global text_widget #Get the text on the field
-    print("Save things here!!!")
-def initialize():
-    root = Tk()
-    root.title("Python Text Editor")
-    label_test = Label(root, text="Text Editor")
-    label_test.grid(row=0, column=0, pady=5)
-    text = Text(root, wrap='word')
-    text.grid(row=1, column=0, sticky="nsew", padx=5, pady=5)
-    root.grid_rowconfigure(1, weight=1)
-    root.grid_columnconfigure(0, weight=1)
-    button = tk.Button(text="Save As", command=saveas)
-    button.grid()
-    root.mainloop()
+v = sys.version_info
+content = None
 if v.major == 2:
-    print("Python v2") #for Python v2 version
+    print("Python Version 2.x")
     from tkinter import *
     import tkFileDialog as tkFileDialog
-    initialize()
-elif v.major >= 3:
-    initialize() # for Python v3
+elif v.major == 3 and v.minor >= 4:
+    print("Python Version 3.x")
+    from tkinter import *
+    import tkinter as tk
+    from tkinter import filedialog as tkFileDialog
 else:
-    print("Unsupported version, please install the Python 3.4 or higher")
-    sys.exit()
+    print("Please, intall the Python 3.4 or higher versions!!!")
+    sys.close()
+
+def saveas():
+    print("Saving as...")
+    content = text_field.get("1.0", "end-1c")
+    print(content)
+
+print("Running....")
+root = tk.Tk()
+root.title("Text Editor")
+root.grid()
+label_subtitle = tk.Label(root, text="Welcome to your simple script interface!", padx=5)
+label_subtitle.grid(row=0, column=0)
+text_field = tk.Entry()
+text_field = Text(root, wrap=WORD)
+text_field.grid(row=2, column=0, sticky="nsew", padx=5, pady=5)
+text_field.insert("1.0", "Insert your code here")
+button = tk.Button(root, text="Save as", command=saveas)
+button.grid(row=1, column=0, padx=5)
+root.rowconfigure(1, weight=1)
+root.columnconfigure(0, weight=1)
+root.mainloop()
