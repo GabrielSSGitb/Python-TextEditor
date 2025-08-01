@@ -38,6 +38,8 @@ def saveas():
             print(f'ERROR: Could not save file: {e}')
     else:
         print("Save operation cancelled.")
+def saveFile():
+    print("Saving file...")
 
 # --- Function to handle dropdown menu selections ---
 def menu_selection_handler(*args): # *args captures the unused name, index, mode arguments
@@ -49,7 +51,8 @@ def menu_selection_handler(*args): # *args captures the unused name, index, mode
     if selected_option == "Save as":
         saveas()
     elif selected_option == "Save":
-        print("Save option selected. (Implementing 'Save' requires tracking current file path)")
+        print("Save option selected.")
+        saveFile()
     elif selected_option == "File":
         # This is often just a placeholder or could open a new file dialog
         print("File option selected (usually a parent menu item).")
